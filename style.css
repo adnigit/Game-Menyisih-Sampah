@@ -1,0 +1,398 @@
+/* Reset kecil supaya ukuran elemen konsisten. */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Latar halaman. */
+body {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Layar pembuka. */
+.screen-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, .9);
+}
+
+/* Kartu judul game. */
+.start-card {
+    padding: 28px;
+    text-align: center;
+    background: #e7bd43;
+    color: #102b2b;
+    border: 4px solid #000;
+}
+
+/* Tombol gambar Play. */
+.image-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 8px 14px;
+    border: 3px solid #000;
+    background: #f36f3d;
+    cursor: pointer;
+}
+
+/* Ukuran gambar di dalam tombol bergambar. */
+.image-button img {
+    display: block;
+    width: 78px;
+    height: 42px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Bar informasi di bagian atas. */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    background-color: #3d3d3d;
+    padding: 15px;
+    border: 4px solid #000;
+    border-radius: 8px;
+}
+
+/* Tampilan total uang. */
+.money-container {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #55ff55;
+}
+
+.phone-icon {
+    width: 52px;
+    height: 34px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin-right: 8px;
+}
+
+.tool-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Tombol Shop dan Settings. */
+.menu-btn {
+    width: 58px;
+    height: 48px;
+    padding: 4px;
+    background-color: #ffcc00;
+    color: #000;
+    border: 3px solid #000;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Gambar pada tombol menu. */
+.menu-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Papan permainan. */
+.game-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #1e1e1e;
+    border: 4px solid #000;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sapu kembali ke sini setelah mouse dilepas. */
+.broom {
+    display: none;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    z-index: 8;
+    font-size: 38px;
+    line-height: 1;
+    user-select: none;
+    cursor: grab;
+    transform: rotate(-25deg);
+}
+
+.broom.dragging {
+    cursor: grabbing;
+}
+
+/* Hadiah uang yang jatuh. */
+.loot {
+    position: absolute;
+    top: 0;
+    z-index: 5;
+    width: 58px;
+    height: 48px;
+    padding: 2px;
+    border: 2px solid #000;
+    background: #ffcc00;
+    cursor: pointer;
+}
+
+/* Gambar uang atau koin di dalam hadiah. */
+.loot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Area sampah dan kecoa. */
+.trash-zone {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #555;
+    margin-bottom: 30px;
+    background-color: #252525;
+    border-radius: 6px;
+    position: relative;
+}
+
+/* Item sampah dibuat transparan, jadi yang terlihat hanya gambarnya. */
+.trash-item {
+    min-width: 0;
+    min-height: 0;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Ukuran gambar sampah. */
+.trash-item img {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Ukuran dasar objek kecoa. */
+.roach-zone {
+    width: 100%;
+    height: 145px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 3px solid #4d4d4d;
+    background-color: #111;
+}
+
+/* Baru terlihat saat kecoa muncul. */
+.roach-hud,
+.health-track {
+    display: none;
+}
+
+/* Kecoa bisa diserang dengan sapu. */
+.roach {
+    cursor: crosshair;
+}
+
+/* Efek kena sapu. */
+.roach.hit {
+    animation: hit 0.15s ease;
+}
+
+/* Animasi hit. */
+@keyframes hit {
+    50% { filter: brightness(2); transform: scale(.85); }
+}
+
+.roach {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    will-change: transform;
+}
+
+/* State kalah. */
+.roach.defeated {
+    opacity: 0.25;
+    transform: scale(0.6) !important;
+}
+
+.broom-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    background-color: #59c3e8;
+    border: 3px solid #000;
+    color: #000;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+}
+
+.broom-emoji {
+    font-size: 34px;
+    line-height: 1;
+}
+
+.broom-btn small {
+    font-size: 10px;
+}
+
+.broom-btn img {
+    width: 48px;
+    height: 40px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Dua tong sampah. */
+.bins-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 12px;
+}
+
+/* Ukuran tombol tong. */
+.bin {
+    width: 65px;
+    height: 90px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    position: relative;
+}
+
+/* Tong organik. */
+.organic-bin {
+    background-color: #2e7d32;
+}
+
+/* Tong anorganik. */
+.inorganic-bin {
+    background-color: #d32f2f;
+}
+
+/* Label tong. */
+.bin-label {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 1px 3px;
+    font-size: 9px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Item yang sedang dipilih. */
+.trash-item.selected {
+    outline: 4px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Efek hover tong. */
+.bin-hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    border-color: #fff;
+}
+
+/* Latar modal. */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+/* Isi modal. */
+.modal-content {
+    background-color: #333;
+    padding: 30px;
+    border: 4px solid #000;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+/* Gambar settings. */
+.modal-image {
+    display: block;
+    width: 76px;
+    height: 58px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin: 12px auto;
+}
+
+/* Tombol tutup. */
+.close-btn {
+    background-color: #d32f2f;
+    color: white;
+    border: 2px solid #000;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Sembunyikan elemen. */
+.hide {
+    display: none !important;
+}
