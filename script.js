@@ -1,5 +1,5 @@
 // Semua gambar game ada di folder ini.
-const $ = id => document.getElementById(id), path = './SUDAH DI HAPUS BACKGROUND/';
+const $ = id => document.getElementById(id), path = './gambar/';
 
 // [gambar, tipe tong, nama untuk alt text]
 const sampah = [
