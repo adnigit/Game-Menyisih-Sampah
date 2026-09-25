@@ -1,86 +1,142 @@
 <!DOCTYPE html>
+<!-- Menentukan bahwa dokumen ini menggunakan standar HTML5. -->
 <html lang="id">
+<!-- Membuka dokumen dengan bahasa utama Indonesia. -->
 <head>
     <!-- Pengaturan halaman. -->
+    <!-- Mendukung huruf dan simbol Unicode, termasuk emoji uang dan sapu. -->
     <meta charset="UTF-8">
+    <!-- Membuat ukuran game menyesuaikan layar HP dan komputer. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul yang tampil pada tab browser. -->
     <title>BILAH SAMPAH</title>
+    <!-- Menghubungkan halaman dengan aturan tampilan CSS. -->
     <link rel="stylesheet" href="style.css">
+<!-- Menutup bagian pengaturan halaman. -->
 </head>
+<!-- Membuka isi halaman yang terlihat oleh player. -->
 <body>
     <!-- Layar awal. -->
+    <!-- id dipakai JavaScript untuk menyembunyikan layar setelah Play ditekan. -->
     <div id="start-screen" class="screen-overlay">
+        <!-- Kartu yang menampung judul dan tombol Play. -->
         <div class="start-card">
+            <!-- Gambar hiasan kecoa pada layar awal. -->
             <img src="./gambar/KECOA.png" alt="Kecoa" class="start-roach">
+            <!-- Nama game. -->
             <h1>BILAH SAMPAH</h1>
+            <!-- Deskripsi singkat tujuan game. -->
             <p>Pilah sampah sesuai tempatnya.</p>
+            <!-- Tombol Play yang dikendalikan oleh script.js. -->
             <button id="play-btn" class="image-button play-button" type="button">
+                <!-- Gambar tombol Play tanpa teks tambahan. -->
                 <img src="./gambar/PLAY.png" alt="Play">
+            <!-- Menutup tombol Play. -->
             </button>
+        <!-- Menutup kartu pembuka. -->
         </div>
+    <!-- Menutup layar pembuka. -->
     </div>
 
     <!-- Informasi game dan menu. -->
+    <!-- Header berisi saldo, ronde, match, shop, dan settings. -->
     <header class="game-header">
+        <!-- Wadah tampilan uang player. -->
         <div class="money-container">
+            <!-- money-counter diubah JavaScript ketika saldo berubah. -->
             <span aria-label="Total uang">💰 <span id="money-counter">0</span></span>
+        <!-- Menutup wadah uang. -->
         </div>
+        <!-- Wadah informasi ronde dan jumlah match. -->
         <div class="round-info">
+            <!-- round-counter menunjukkan ronde yang sedang dimainkan. -->
             <strong>RONDE <span id="round-counter">1</span></strong>
+            <!-- match-counter menunjukkan jumlah pilahan dari maksimal lima. -->
             <span>MATCH <span id="match-counter">0</span>/5</span>
+        <!-- Menutup informasi ronde. -->
         </div>
+        <!-- Wadah tombol menu. -->
         <div class="tool-container">
+            <!-- Tombol untuk membuka shop. -->
             <button id="shop-btn" class="menu-btn" type="button" aria-label="Shop">
                 <img src="./gambar/SHOP.png" alt="Shop">
             </button>
+            <!-- Tombol untuk membuka settings. -->
             <button id="settings-btn" class="menu-btn" type="button" aria-label="Settings">
                 <img src="./gambar/SETTINGS.png" alt="Settings">
             </button>
+        <!-- Menutup wadah menu. -->
         </div>
+    <!-- Menutup header. -->
     </header>
 
     <!-- Area utama game. -->
+    <!-- Papan utama tempat player bermain. -->
     <main class="game-container">
+        <!-- Area tempat sampah dan kecoa muncul bergantian. -->
         <section id="trash-zone" class="trash-zone" aria-label="Area memilah sampah">
+            <!-- Nomor HP hanya ditampilkan saat kecoa sedang aktif. -->
             <div id="roach-hud" class="roach-hud"><strong id="roach-hp">0 / 0</strong></div>
+            <!-- Bar visual yang menunjukkan sisa HP kecoa. -->
             <div id="health-track" class="health-track"><div id="health-bar" class="health-bar"></div></div>
+            <!-- Gambar kecoa yang bergerak dan menjadi target sapu. -->
             <img id="roach" class="roach" src="./gambar/KECOA.png" alt="Kecoa">
+            <!-- Sapu emoji yang dapat diambil dari pojok kanan bawah. -->
             <div id="broom" class="broom" aria-label="Ambil sapu">🧹</div>
+        <!-- Menutup area sampah. -->
         </section>
 
         <!-- Tong pemilahan. -->
+        <!-- Dua tombol tujuan pemilahan. -->
         <section class="bins-container">
+            <!-- data-type dipakai script.js untuk mencocokkan sampah organik. -->
             <div class="bin trash-bin organic-bin" data-type="organik">
                 <div class="bin-label">ORGANIK</div>
             </div>
+            <!-- data-type dipakai script.js untuk mencocokkan sampah anorganik. -->
             <div class="bin trash-bin inorganic-bin" data-type="anorganik">
                 <div class="bin-label">ANORGANIK</div>
             </div>
+        <!-- Menutup bagian tombol tong. -->
         </section>
+    <!-- Menutup papan utama. -->
     </main>
 
     <!-- Shop upgrade sapu. -->
+    <!-- Modal shop disembunyikan oleh class hide sampai tombol Shop ditekan. -->
     <div id="shop-modal" class="modal hide">
+        <!-- Isi modal shop. -->
         <div class="modal-content">
             <h2>SHOP SAPU</h2>
+            <!-- damage-value menampilkan kekuatan sapu saat ini. -->
             <p>Damage sapu: <strong id="damage-value">15</strong></p>
+            <!-- upgrade-cost menampilkan harga upgrade berikutnya. -->
             <button id="upgrade-btn" class="upgrade-btn" type="button">Upgrade damage <span id="upgrade-cost">Rp 5.000</span></button>
+            <!-- data-close memberitahu JavaScript modal mana yang ditutup. -->
             <button class="close-btn" data-close="shop-modal" type="button">Tutup</button>
         </div>
     </div>
 
     <!-- Pengaturan game. -->
+    <!-- Modal pengaturan game. -->
     <div id="settings-modal" class="modal hide">
         <div class="modal-content">
             <h2>SETTINGS</h2>
+            <!-- Gambar settings sebagai identitas modal. -->
             <img class="modal-image" src="./gambar/SETTINGS.png" alt="Settings">
+            <!-- Checkbox untuk mengaktifkan atau mematikan status suara. -->
             <label class="sound-setting"><input id="sound-toggle" type="checkbox" checked> Suara aktif</label>
+            <!-- Tombol untuk mengembalikan progres game. -->
             <button id="reset-btn" class="reset-btn" type="button">Reset progres</button>
+            <!-- Tombol untuk menutup modal settings. -->
             <button class="close-btn" data-close="settings-modal" type="button">Tutup</button>
         </div>
     </div>
 
     <!-- Jalankan logika game. -->
+    <!-- Memuat logika game setelah semua elemen HTML selesai dibuat. -->
     <script src="script.js"></script>
+<!-- Menutup isi halaman. -->
 </body>
+<!-- Menutup dokumen HTML. -->
 </html>

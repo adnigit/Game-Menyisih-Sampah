@@ -1,82 +1,129 @@
 /* Reset kecil supaya ukuran elemen konsisten. */
 * {
+    /* box-sizing membuat padding dan border ikut dihitung dalam ukuran elemen. */
     box-sizing: border-box;
+    /* Menghapus margin bawaan browser. */
     margin: 0;
+    /* Menghapus padding bawaan browser. */
     padding: 0;
+    /* Font pixel sederhana agar sesuai gaya game. */
     font-family: 'Courier New', Courier, monospace;
 }
 
 /* Latar halaman. */
 body {
+    /* Warna latar halaman. */
     background-color: #2b2b2b;
+    /* Warna teks default. */
     color: #ffffff;
+    /* Menyusun header dan papan game secara vertikal. */
     display: flex;
     flex-direction: column;
+    /* Menempatkan game di tengah secara horizontal. */
     align-items: center;
+    /* Menempatkan isi di tengah layar secara vertikal. */
     justify-content: center;
+    /* Tinggi minimal memenuhi layar. */
     min-height: 100vh;
+    /* Jarak game dari tepi layar. */
     padding: 20px;
 }
 
 /* Layar pembuka. */
 .screen-overlay {
+    /* Overlay menutupi seluruh layar sebelum game dimulai. */
     position: fixed;
+    /* Menempel ke semua sisi layar. */
     inset: 0;
+    /* Berada di atas semua elemen game. */
     z-index: 20;
+    /* Membuat kartu berada tepat di tengah. */
     display: grid;
     place-items: center;
+    /* Jarak aman pada layar kecil. */
     padding: 20px;
+    /* Latar gelap agar layar awal fokus. */
     background: rgba(0, 0, 0, .9);
 }
 
 /* Kartu judul game. */
 .start-card {
+    /* Ruang di dalam kartu pembuka. */
     padding: 28px;
+    /* Teks kartu dibuat rata tengah. */
     text-align: center;
+    /* Warna kartu pembuka. */
     background: #e7bd43;
+    /* Warna teks pada kartu. */
     color: #102b2b;
+    /* Bingkai kartu. */
     border: 4px solid #000;
 }
 
 /* Tombol gambar Play. */
 .image-button {
+    /* Tombol dibuat block agar margin auto dapat memusatkannya. */
     display: block;
+    /* Jarak tombol dari teks deskripsi. */
     margin: 20px auto 0;
+    /* Jarak antara bingkai dan gambar Play. */
     padding: 8px 14px;
+    /* Bingkai tombol. */
     border: 3px solid #000;
+    /* Warna latar tombol. */
     background: #f36f3d;
+    /* Memberi tanda bahwa tombol bisa ditekan. */
     cursor: pointer;
 }
 
 /* Ukuran gambar di dalam tombol bergambar. */
 .image-button img {
+    /* Gambar memenuhi tombol tanpa terdistorsi. */
     display: block;
+    /* Lebar gambar Play. */
     width: 78px;
+    /* Tinggi gambar Play. */
     height: 42px;
+    /* Menjaga rasio gambar. */
     object-fit: contain;
+    /* Membuat pixel art tetap tajam. */
     image-rendering: pixelated;
 }
 
 /* Bar informasi di bagian atas. */
 .game-header {
+    /* Susun isi header dari kiri ke kanan. */
     display: flex;
+    /* Beri jarak maksimal di antara kelompok HUD. */
     justify-content: space-between;
+    /* Sejajarkan semua isi secara vertikal. */
     align-items: center;
+    /* Header tidak melebar lebih dari 500px. */
     width: 100%;
     max-width: 500px;
+    /* Jarak header dari papan game. */
     margin-bottom: 20px;
+    /* Warna panel header. */
     background-color: #3d3d3d;
+    /* Jarak isi header dari tepi. */
     padding: 15px;
+    /* Bingkai header. */
     border: 4px solid #000;
+    /* Sudut header dibuat sedikit membulat. */
     border-radius: 8px;
 }
 
 /* Tampilan total uang. */
 .money-container {
+    /* Susun ikon emoji dan angka uang berdampingan. */
     display: flex;
+    /* Sejajarkan emoji dan angka. */
     align-items: center;
+    /* Ukuran angka saldo. */
     font-size: 24px;
+    /* Tebalkan saldo agar mudah dilihat. */
     font-weight: bold;
+    /* Warna hijau untuk menunjukkan uang. */
     color: #55ff55;
 }
 
@@ -89,27 +136,37 @@ body {
 }
 
 .tool-container {
+    /* Kelompokkan tombol Shop dan Settings. */
     display: flex;
+    /* Jarak antar tombol menu. */
     align-items: center;
     gap: 15px;
 }
 
 /* Tombol Shop dan Settings. */
 .menu-btn {
+    /* Ukuran tetap agar tombol tidak berubah saat gambar dimuat. */
     width: 58px;
     height: 48px;
+    /* Jarak gambar dari bingkai tombol. */
     padding: 4px;
+    /* Warna latar tombol menu. */
     background-color: #ffcc00;
+    /* Warna teks jika tombol memiliki teks. */
     color: #000;
+    /* Bingkai hitam tombol. */
     border: 3px solid #000;
+    /* Cursor tangan menandakan tombol dapat ditekan. */
     padding: 8px 16px;
     font-weight: bold;
     cursor: pointer;
+    /* Sudut tombol. */
     border-radius: 4px;
 }
 
 /* Gambar pada tombol menu. */
 .menu-btn img {
+    /* Gambar menu mengisi ruang tombol. */
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -118,52 +175,80 @@ body {
 
 /* Papan permainan. */
 .game-container {
+    /* Papan game menjadi wadah utama semua objek. */
     width: 100%;
     max-width: 500px;
+    /* Warna latar papan. */
     background-color: #1e1e1e;
+    /* Bingkai papan. */
     border: 4px solid #000;
+    /* Sudut papan. */
     border-radius: 8px;
+    /* Jarak isi papan dari tepi. */
     padding: 20px;
+    /* Susun area sampah dan tong secara vertikal. */
     display: flex;
     flex-direction: column;
+    /* Pusatkan isi papan. */
     align-items: center;
+    /* Menjadi acuan posisi sapu dan hadiah absolute. */
     position: relative;
+    /* Hadiah tidak boleh keluar dari papan. */
     overflow: hidden;
 }
 
 /* Sapu kembali ke sini setelah mouse dilepas. */
 .broom {
+    /* Sapu disembunyikan sampai player menekan Play. */
     display: none;
+    /* Posisi sapu dihitung dari papan game. */
     position: absolute;
+    /* Letak awal sapu di pojok kanan bawah. */
     right: 8px;
     bottom: 8px;
+    /* Sapu berada di atas sampah dan kecoa. */
     z-index: 8;
+    /* Ukuran emoji sapu. */
     font-size: 38px;
+    /* Menjaga tinggi baris tetap rapat. */
     line-height: 1;
+    /* Mencegah teks sapu terseleksi saat di-drag. */
     user-select: none;
+    /* Cursor saat sapu bisa diambil. */
     cursor: grab;
+    /* Arah visual sapu. */
     transform: rotate(-25deg);
 }
 
 .broom.dragging {
+    /* Cursor berubah saat sapu sedang dibawa. */
     cursor: grabbing;
 }
 
 /* Hadiah uang yang jatuh. */
 .loot {
+    /* Hadiah memakai posisi absolute agar bisa jatuh dari atas. */
     position: absolute;
+    /* Hadiah mulai dari bagian atas papan. */
     top: 0;
+    /* Hadiah harus berada di atas objek lain. */
     z-index: 5;
+    /* Ukuran hadiah. */
     width: 58px;
     height: 48px;
+    /* Jarak gambar dari bingkai hadiah. */
     padding: 2px;
+    /* Bingkai hadiah. */
     border: 2px solid #000;
+    /* Warna latar hadiah. */
     background: #ffcc00;
+    /* Hadiah dapat diklik. */
     cursor: pointer;
 }
 
 /* Gambar uang atau koin di dalam hadiah. */
 .loot img {
+    /* Gambar hadiah mengisi tombol tanpa terpotong. */
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -172,20 +257,29 @@ body {
 
 /* Area sampah dan kecoa. */
 .trash-zone {
+    /* Area item sampah memiliki ukuran tetap. */
     width: 100%;
     height: 150px;
+    /* Pusatkan gambar sampah secara horizontal. */
     display: flex;
     justify-content: center;
+    /* Pusatkan gambar secara vertikal. */
     align-items: center;
+    /* Bingkai area sampah. */
     border: 3px dashed #555;
+    /* Jarak area dari tong. */
     margin-bottom: 30px;
+    /* Warna latar area sampah. */
     background-color: #252525;
+    /* Sudut area. */
     border-radius: 6px;
+    /* Menjadi acuan posisi kecoa dan sapu. */
     position: relative;
 }
 
 /* Item sampah dibuat transparan, jadi yang terlihat hanya gambarnya. */
 .trash-item {
+    /* Tombol item tidak memiliki warna agar background gambar tetap transparan. */
     min-width: 0;
     min-height: 0;
     width: 100px;
