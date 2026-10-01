@@ -1,492 +1,364 @@
-/* Reset kecil supaya ukuran elemen konsisten. */
 * {
-    /* box-sizing membuat padding dan border ikut dihitung dalam ukuran elemen. */
     box-sizing: border-box;
-    /* Menghapus margin bawaan browser. */
     margin: 0;
-    /* Menghapus padding bawaan browser. */
     padding: 0;
-    /* Font pixel sederhana agar sesuai gaya game. */
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* Latar halaman. */
 body {
-    /* Warna latar halaman. */
-    background-color: #2b2b2b;
-    /* Warna teks default. */
-    color: #ffffff;
-    /* Menyusun header dan papan game secara vertikal. */
-    display: flex;
-    flex-direction: column;
-    /* Menempatkan game di tengah secara horizontal. */
-    align-items: center;
-    /* Menempatkan isi di tengah layar secara vertikal. */
-    justify-content: center;
-    /* Tinggi minimal memenuhi layar. */
     min-height: 100vh;
-    /* Jarak game dari tepi layar. */
     padding: 20px;
+    background: #18212b;
+    color: #fff;
 }
 
-/* Layar pembuka. */
+button {
+    font: inherit;
+}
+
 .screen-overlay {
-    /* Overlay menutupi seluruh layar sebelum game dimulai. */
     position: fixed;
-    /* Menempel ke semua sisi layar. */
     inset: 0;
-    /* Berada di atas semua elemen game. */
     z-index: 20;
-    /* Membuat kartu berada tepat di tengah. */
     display: grid;
     place-items: center;
-    /* Jarak aman pada layar kecil. */
     padding: 20px;
-    /* Latar gelap agar layar awal fokus. */
-    background: rgba(0, 0, 0, .9);
+    background: rgba(10, 15, 20, 0.94);
 }
 
-/* Kartu judul game. */
+.start-card,
+.game-header,
+.game-container,
+.modal-content {
+    border: 4px solid #050505;
+    border-radius: 8px;
+    box-shadow: 6px 6px 0 #050505;
+}
+
 .start-card {
-    /* Ruang di dalam kartu pembuka. */
+    width: min(100%, 420px);
     padding: 28px;
-    /* Teks kartu dibuat rata tengah. */
     text-align: center;
-    /* Warna kartu pembuka. */
-    background: #e7bd43;
-    /* Warna teks pada kartu. */
-    color: #102b2b;
-    /* Bingkai kartu. */
-    border: 4px solid #000;
+    background: #30495a;
 }
 
-/* Tombol gambar Play. */
-.image-button {
-    /* Tombol dibuat block agar margin auto dapat memusatkannya. */
-    display: block;
-    /* Jarak tombol dari teks deskripsi. */
-    margin: 20px auto 0;
-    /* Jarak antara bingkai dan gambar Play. */
-    padding: 8px 14px;
-    /* Bingkai tombol. */
-    border: 3px solid #000;
-    /* Warna latar tombol. */
-    background: #f36f3d;
-    /* Memberi tanda bahwa tombol bisa ditekan. */
-    cursor: pointer;
+.start-card h1 {
+    margin: 12px 0 8px;
+    color: #ffcc00;
 }
 
-/* Ukuran gambar di dalam tombol bergambar. */
-.image-button img {
-    /* Gambar memenuhi tombol tanpa terdistorsi. */
-    display: block;
-    /* Lebar gambar Play. */
-    width: 78px;
-    /* Tinggi gambar Play. */
-    height: 42px;
-    /* Menjaga rasio gambar. */
-    object-fit: contain;
-    /* Membuat pixel art tetap tajam. */
-    image-rendering: pixelated;
+.start-card p {
+    margin-bottom: 18px;
 }
 
-/* Bar informasi di bagian atas. */
-.game-header {
-    /* Susun isi header dari kiri ke kanan. */
-    display: flex;
-    /* Beri jarak maksimal di antara kelompok HUD. */
-    justify-content: space-between;
-    /* Sejajarkan semua isi secara vertikal. */
-    align-items: center;
-    /* Header tidak melebar lebih dari 500px. */
-    width: 100%;
-    max-width: 500px;
-    /* Jarak header dari papan game. */
-    margin-bottom: 20px;
-    /* Warna panel header. */
-    background-color: #3d3d3d;
-    /* Jarak isi header dari tepi. */
-    padding: 15px;
-    /* Bingkai header. */
-    border: 4px solid #000;
-    /* Sudut header dibuat sedikit membulat. */
-    border-radius: 8px;
-}
-
-/* Tampilan total uang. */
-.money-container {
-    /* Susun ikon emoji dan angka uang berdampingan. */
-    display: flex;
-    /* Sejajarkan emoji dan angka. */
-    align-items: center;
-    /* Ukuran angka saldo. */
-    font-size: 24px;
-    /* Tebalkan saldo agar mudah dilihat. */
-    font-weight: bold;
-    /* Warna hijau untuk menunjukkan uang. */
-    color: #55ff55;
-}
-
-.phone-icon {
-    width: 52px;
-    height: 34px;
+.start-roach {
+    width: 90px;
+    height: 70px;
     object-fit: contain;
     image-rendering: pixelated;
-    margin-right: 8px;
 }
 
-.tool-container {
-    /* Kelompokkan tombol Shop dan Settings. */
-    display: flex;
-    /* Jarak antar tombol menu. */
-    align-items: center;
-    gap: 15px;
-}
-
-/* Tombol Shop dan Settings. */
+.image-button,
 .menu-btn {
-    /* Ukuran tetap agar tombol tidak berubah saat gambar dimuat. */
-    width: 58px;
-    height: 48px;
-    /* Jarak gambar dari bingkai tombol. */
-    padding: 4px;
-    /* Warna latar tombol menu. */
-    background-color: #ffcc00;
-    /* Warna teks jika tombol memiliki teks. */
-    color: #000;
-    /* Bingkai hitam tombol. */
-    border: 3px solid #000;
-    /* Cursor tangan menandakan tombol dapat ditekan. */
-    padding: 8px 16px;
-    font-weight: bold;
-    cursor: pointer;
-    /* Sudut tombol. */
-    border-radius: 4px;
-}
-
-/* Gambar pada tombol menu. */
-.menu-btn img {
-    /* Gambar menu mengisi ruang tombol. */
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
-}
-
-/* Papan permainan. */
-.game-container {
-    /* Papan game menjadi wadah utama semua objek. */
-    width: 100%;
-    max-width: 500px;
-    /* Warna latar papan. */
-    background-color: #1e1e1e;
-    /* Bingkai papan. */
-    border: 4px solid #000;
-    /* Sudut papan. */
-    border-radius: 8px;
-    /* Jarak isi papan dari tepi. */
-    padding: 20px;
-    /* Susun area sampah dan tong secara vertikal. */
-    display: flex;
-    flex-direction: column;
-    /* Pusatkan isi papan. */
-    align-items: center;
-    /* Menjadi acuan posisi sapu dan hadiah absolute. */
-    position: relative;
-    /* Hadiah tidak boleh keluar dari papan. */
-    overflow: hidden;
-}
-
-/* Sapu kembali ke sini setelah mouse dilepas. */
-.broom {
-    /* Sapu disembunyikan sampai player menekan Play. */
-    display: none;
-    /* Posisi sapu dihitung dari papan game. */
-    position: absolute;
-    /* Letak awal sapu di pojok kanan bawah. */
-    right: 8px;
-    bottom: 8px;
-    /* Sapu berada di atas sampah dan kecoa. */
-    z-index: 8;
-    /* Ukuran emoji sapu. */
-    font-size: 38px;
-    /* Menjaga tinggi baris tetap rapat. */
-    line-height: 1;
-    /* Mencegah teks sapu terseleksi saat di-drag. */
-    user-select: none;
-    /* Cursor saat sapu bisa diambil. */
-    cursor: grab;
-    /* Arah visual sapu. */
-    transform: rotate(-25deg);
-}
-
-.broom.dragging {
-    /* Cursor berubah saat sapu sedang dibawa. */
-    cursor: grabbing;
-}
-
-/* Hadiah uang yang jatuh. */
-.loot {
-    /* Hadiah memakai posisi absolute agar bisa jatuh dari atas. */
-    position: absolute;
-    /* Hadiah mulai dari bagian atas papan. */
-    top: 0;
-    /* Hadiah harus berada di atas objek lain. */
-    z-index: 5;
-    /* Ukuran hadiah. */
-    width: 58px;
-    height: 48px;
-    /* Jarak gambar dari bingkai hadiah. */
-    padding: 2px;
-    /* Bingkai hadiah. */
-    border: 2px solid #000;
-    /* Warna latar hadiah. */
+    border: 3px solid #050505;
     background: #ffcc00;
-    /* Hadiah dapat diklik. */
     cursor: pointer;
 }
 
-/* Gambar uang atau koin di dalam hadiah. */
-.loot img {
-    /* Gambar hadiah mengisi tombol tanpa terpotong. */
-    width: 100%;
-    height: 100%;
+.image-button {
+    padding: 8px 18px;
+}
+
+.image-button img {
+    width: 80px;
+    height: 42px;
     object-fit: contain;
     image-rendering: pixelated;
 }
 
-/* Area sampah dan kecoa. */
-.trash-zone {
-    /* Area item sampah memiliki ukuran tetap. */
-    width: 100%;
-    height: 150px;
-    /* Pusatkan gambar sampah secara horizontal. */
-    display: flex;
-    justify-content: center;
-    /* Pusatkan gambar secara vertikal. */
-    align-items: center;
-    /* Bingkai area sampah. */
-    border: 3px dashed #555;
-    /* Jarak area dari tong. */
-    margin-bottom: 30px;
-    /* Warna latar area sampah. */
-    background-color: #252525;
-    /* Sudut area. */
-    border-radius: 6px;
-    /* Menjadi acuan posisi kecoa dan sapu. */
-    position: relative;
+.game-header,
+.game-container {
+    width: min(100%, 560px);
+    margin: 0 auto 18px;
+    background: #263746;
 }
 
-/* Item sampah dibuat transparan, jadi yang terlihat hanya gambarnya. */
-.trash-item {
-    /* Tombol item tidak memiliki warna agar background gambar tetap transparan. */
-    min-width: 0;
-    min-height: 0;
-    width: 100px;
-    height: 100px;
-    padding: 0;
+.game-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    font: inherit;
-    font-weight: bold;
-    position: relative;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
 }
 
-/* Ukuran gambar sampah. */
-.trash-item img {
-    width: 76px;
-    height: 76px;
-    object-fit: contain;
-    image-rendering: pixelated;
-}
-
-/* Ukuran dasar objek kecoa. */
-.roach-zone {
-    width: 100%;
-    height: 145px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 16px;
-    border: 3px solid #4d4d4d;
-    background-color: #111;
-}
-
-/* Baru terlihat saat kecoa muncul. */
-.roach-hud,
-.health-track {
-    display: none;
-}
-
-/* Kecoa bisa diserang dengan sapu. */
-.roach {
-    cursor: crosshair;
-}
-
-/* Efek kena sapu. */
-.roach.hit {
-    animation: hit 0.15s ease;
-}
-
-/* Animasi hit. */
-@keyframes hit {
-    50% { filter: brightness(2); transform: scale(.85); }
-}
-
-.roach {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 54px;
-    height: 54px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    will-change: transform;
-}
-
-/* State kalah. */
-.roach.defeated {
-    opacity: 0.25;
-    transform: scale(0.6) !important;
-}
-
-.broom-btn {
+.money-container,
+.round-info,
+.tool-container {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 18px;
-    padding: 6px 12px;
-    background-color: #59c3e8;
-    border: 3px solid #000;
-    color: #000;
-    cursor: pointer;
-    font: inherit;
+}
+
+.money-container {
+    color: #65ef7a;
+    font-size: 17px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
-.broom-emoji {
-    font-size: 34px;
-    line-height: 1;
+.round-info {
+    flex-direction: column;
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
-.broom-btn small {
-    font-size: 10px;
+.round-info strong {
+    font-size: 16px;
 }
 
-.broom-btn img {
+.tool-container {
+    flex-shrink: 0;
+    gap: 6px;
+}
+
+.menu-btn {
     width: 48px;
-    height: 40px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    border: 3px solid #050505;
+    background: #ffcc00;
+    cursor: pointer;
+}
+
+.menu-btn img,
+.modal-image {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     image-rendering: pixelated;
 }
 
-/* Dua tong sampah. */
-.bins-container {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 12px;
-}
-
-/* Ukuran tombol tong. */
-.bin {
-    width: 65px;
-    height: 90px;
-    border: 2px solid #000;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 10px;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+.game-container {
     position: relative;
+    min-height: 410px;
+    padding: 20px;
+    background: url("./gambar/background.png.jpeg") center / cover no-repeat, #202b34;
 }
 
-/* Tong organik. */
-.organic-bin {
-    background-color: #2e7d32;
+.trash-zone {
+    position: relative;
+    width: 100%;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 3px dashed #64727d;
+    background: #111920;
 }
 
-/* Tong anorganik. */
-.inorganic-bin {
-    background-color: #d32f2f;
+.trash-item {
+    z-index: 2;
+    min-width: 100px;
+    min-height: 80px;
+    padding: 8px;
+    border: 3px solid #050505;
+    background: #ffcc00;
+    cursor: pointer;
 }
 
-/* Label tong. */
-.bin-label {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 1px 3px;
-    font-size: 9px;
-    font-weight: bold;
-    border-radius: 4px;
+.trash-item img {
+    width: 68px;
+    height: 58px;
+    object-fit: contain;
+    image-rendering: pixelated;
 }
 
-/* Item yang sedang dipilih. */
 .trash-item.selected {
     outline: 4px solid #fff;
     outline-offset: 3px;
 }
 
-/* Efek hover tong. */
-.bin-hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-    border-color: #fff;
-}
-
-/* Latar modal. */
-.modal {
-    position: fixed;
+.roach {
+    position: absolute;
+    z-index: 3;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-/* Isi modal. */
-.modal-content {
-    background-color: #333;
-    padding: 30px;
-    border: 4px solid #000;
-    border-radius: 8px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-}
-
-/* Gambar settings. */
-.modal-image {
-    display: block;
-    width: 76px;
+    width: 58px;
     height: 58px;
+    display: none;
     object-fit: contain;
     image-rendering: pixelated;
-    margin: 12px auto;
+    pointer-events: none;
 }
 
-/* Tombol tutup. */
-.close-btn {
-    background-color: #d32f2f;
-    color: white;
+.roach.hit {
+    animation: hit 180ms linear;
+}
+
+.roach.defeated {
+    opacity: 0;
+}
+
+@keyframes hit {
+    50% { filter: brightness(3); transform: scale(1.2); }
+}
+
+.roach-hud,
+.health-track {
+    position: absolute;
+    z-index: 4;
+    display: none;
+}
+
+.roach-hud {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.health-track {
+    top: 38px;
+    left: 15%;
+    width: 70%;
+    height: 10px;
     border: 2px solid #000;
-    padding: 8px 16px;
+    background: #722b31;
+}
+
+.health-bar {
+    width: 100%;
+    height: 100%;
+    background: #58db69;
+    transition: width 160ms linear;
+}
+
+.broom {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    z-index: 5;
+    font-size: 40px;
+    cursor: grab;
+    user-select: none;
+}
+
+.broom.dragging {
+    cursor: grabbing;
+    transform: scale(1.12);
+}
+
+.bins-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.bin {
+    width: 150px;
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12px;
+    border: 4px solid #050505;
+    cursor: pointer;
+    transition: transform 160ms ease, filter 160ms ease;
+}
+
+.bin:hover,
+.bin-hover {
+    transform: translateY(-4px);
+    filter: brightness(1.2);
+}
+
+.organic-bin { background: #2e8b57; }
+.inorganic-bin { background: #b84242; }
+
+.bin-label {
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.loot {
+    position: absolute;
+    z-index: 8;
+    width: 64px;
+    height: 54px;
+    padding: 2px;
+    border: 3px solid #050505;
+    background: #ffcc00;
+    cursor: pointer;
+}
+
+.loot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+}
+
+.modal-content {
+    width: min(100%, 360px);
+    padding: 24px;
+    text-align: center;
+    background: #30495a;
+}
+
+.modal-content h2,
+.modal-content p,
+.modal-content label,
+.modal-content button {
+    margin-bottom: 14px;
+}
+
+.modal-image {
+    display: block;
+    width: 80px;
+    height: 55px;
+    margin: 10px auto 16px;
+}
+
+.upgrade-btn,
+.reset-btn,
+.close-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #050505;
     cursor: pointer;
     font-weight: bold;
 }
 
-/* Sembunyikan elemen. */
-.hide {
-    display: none !important;
+.upgrade-btn { background: #65ef7a; }
+.reset-btn,
+.close-btn { background: #e45d5d; color: #fff; }
+
+.hide { display: none !important; }
+
+@media (max-width: 520px) {
+    body { padding: 10px; }
+    .game-header { flex-wrap: wrap; }
+    .round-info { order: 3; width: 100%; flex-direction: row; justify-content: center; }
+    .trash-zone { height: 240px; }
+    .bin { width: 45%; }
 }

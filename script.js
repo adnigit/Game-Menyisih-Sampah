@@ -47,7 +47,7 @@ function tampilkanSampah() {
     const [gambar, tipe, nama] = sampah[index];
     trash.querySelector('.trash-item')?.remove();
     trash.insertAdjacentHTML('afterbegin', `<button class="trash-item" data-type="${tipe}" type="button"><img src="${path}${gambar}" alt="${nama}"></button>`);
-    pilihan = trash.firstElementChild;
+    pilihan = trash.querySelector('.trash-item');
     pilihan.onclick = () => pilihan.classList.toggle('selected');
 }
 // Siapkan kecoa dan tampilkan status HP-nya.
